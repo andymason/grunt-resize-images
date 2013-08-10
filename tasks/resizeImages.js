@@ -46,10 +46,11 @@ module.exports = function(grunt) {
       fileCount = realFiles.length;
 
       realFiles.map(function(filePath) {
+        var destFile = file.dest + filePath.replace(/^.*[\\\/]/, '');
         hash_file(filePath, 'md5', finishedHashing);
 
         function finishedHashing(err, hash) {
-          if (fileHashes.hasOwnProperty(filePath) && fileHashes[filePath] === hash) {
+          if (fileHashes.hasOwnProperty(filePath) && fileHashes[filePath] === hash && grunt.file.exists(destFile)) {
             checkIfFininshed();
           } else {
             processImage();
@@ -58,7 +59,7 @@ module.exports = function(grunt) {
         }
 
         function processImage() {
-          var destFile = file.dest + filePath.replace(/^.*[\\\/]/, '');
+
           grunt.file.write(destFile, null);
 
           easyimg.resize({
@@ -68,6 +69,7 @@ module.exports = function(grunt) {
             quality: options.quality
           }, function(err, image) {
             if (err) throw err;
+            grunt.log.write('Created new file: ', destFile);
             checkIfFininshed();
           })
         }
