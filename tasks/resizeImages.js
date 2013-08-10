@@ -4,6 +4,10 @@
  *
  * Copyright (c) 2013 Andrew Mason
  * Licensed under the MIT license.
+ *
+ * TODO:
+ *      - Create 2x versions if needed
+ *      - Find a better place for fileManifest.json
  */
 
 'use strict';
@@ -54,11 +58,12 @@ module.exports = function(grunt) {
         }
 
         function processImage() {
-          var filename = filePath.replace(/^.*[\\\/]/, '');
+          var destFile = file.dest + filePath.replace(/^.*[\\\/]/, '');
+          grunt.file.write(destFile, null);
 
           easyimg.resize({
             src: filePath,
-            dst: './' + filename,
+            dst: destFile,
             width: options.width,
             quality: options.quality
           }, function(err, image) {
