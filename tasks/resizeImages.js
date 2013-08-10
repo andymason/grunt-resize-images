@@ -69,7 +69,7 @@ module.exports = function(grunt) {
             quality: options.quality
           }, function(err, image) {
             if (err) throw err;
-            grunt.log.write('Created new file: ', destFile);
+            grunt.log.writeln('Created new file: ', destFile);
             checkIfFininshed();
           })
         }
