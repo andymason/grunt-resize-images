@@ -1,5 +1,5 @@
 {
-  "name": "grunt-resizeImages",
+  "name": "grunt-resize-images",
   "description": "Selectively resize images",
   "version": "0.1.0",
   "homepage": "https://github.com/andrew/grunt-resizeImages",
